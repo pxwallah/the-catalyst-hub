@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Catalyst Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#050816;
+color:white;
+overflow-x:hidden;
+}
+
+/* Background */
+
+.bg-blur1,
+.bg-blur2{
+position:fixed;
+width:450px;
+height:450px;
+border-radius:50%;
+filter:blur(130px);
+z-index:-1;
+}
+
+.bg-blur1{
+background:#2563eb;
+top:-120px;
+left:-100px;
+opacity:0.30;
+}
+
+.bg-blur2{
+background:#7c3aed;
+bottom:-120px;
+right:-100px;
+opacity:0.30;
+}
+
+/* Navbar */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:22px 7%;
+position:sticky;
+top:0;
+background:rgba(5,8,22,0.75);
+backdrop-filter:blur(15px);
+border-bottom:1px solid rgba(255,255,255,0.08);
+z-index:1000;
+}
+
+.logo{
+font-size:32px;
+font-weight:800;
+background:linear-gradient(to right,#ffffff,#60a5fa);
+background-clip:text;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.nav-links{
+display:flex;
+align-items:center;
+gap:18px;
+flex-wrap:wrap;
+}
+
+.nav-links a{
+text-decoration:none;
+color:#d1d5db;
+font-size:15px;
+transition:0.3s;
+}
+
+.nav-links a:hover{
+color:white;
+}
+
+/* Buttons */
+
+.btn{
+padding:14px 28px;
+border:none;
+border-radius:14px;
+font-size:15px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+text-decoration:none;
+display:inline-block;
+}
+
+.btn-primary{
+background:linear-gradient(to right,#2563eb,#3b82f6);
+color:white;
+box-shadow:0 10px 25px rgba(37,99,235,0.35);
+}
+
+.btn-secondary{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+color:white;
+}
+
+.btn:hover{
+transform:translateY(-4px);
+}
+
+/* Hero */
+
+.hero{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:80px 7%;
+text-align:center;
+}
+
+.hero-content{
+max-width:950px;
+}
+
+.hero-badge{
+display:inline-block;
+padding:10px 18px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:50px;
+margin-bottom:25px;
+font-size:14px;
+color:#93c5fd;
+}
+
+.hero h1{
+font-size:82px;
+line-height:1.05;
+margin-bottom:25px;
+font-weight:800;
+}
+
+.gradient-text{
+background:linear-gradient(to right,#3b82f6,#8b5cf6);
+background-clip:text;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero p{
+font-size:18px;
+line-height:1.9;
+color:#9ca3af;
+max-width:760px;
+margin:auto;
+}
+
+.hero-buttons{
+margin-top:45px;
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+/* Dashboard Preview */
+
+.preview{
+padding:0 7% 100px;
+}
+
+.preview-box{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:30px;
+padding:30px;
+backdrop-filter:blur(15px);
+box-shadow:0 15px 40px rgba(0,0,0,0.3);
+}
+
+.preview-top{
+display:flex;
+gap:10px;
+margin-bottom:20px;
+}
+
+.circle{
+width:14px;
+height:14px;
+border-radius:50%;
+}
+
+.red{background:#ef4444;}
+.yellow{background:#facc15;}
+.green{background:#22c55e;}
+
+.preview-content{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.preview-card{
+background:#0f172a;
+padding:25px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,0.05);
+}
+
+.preview-card h3{
+margin-bottom:12px;
+font-size:22px;
+}
+
+.preview-card p{
+color:#9ca3af;
+line-height:1.7;
+}
+
+/* Sections */
+
+section{
+padding:100px 7%;
+}
+
+.section-title{
+text-align:center;
+font-size:52px;
+margin-bottom:70px;
+font-weight:700;
+}
+
+/* Features */
+
+.feature-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.feature-card{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+padding:35px;
+border-radius:28px;
+transition:0.35s;
+backdrop-filter:blur(14px);
+}
+
+.feature-card:hover{
+transform:translateY(-10px);
+border-color:#3b82f6;
+box-shadow:0 15px 40px rgba(37,99,235,0.18);
+}
+
+.feature-icon{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.feature-card h3{
+font-size:24px;
+margin-bottom:15px;
+}
+
+.feature-card p{
+color:#9ca3af;
+line-height:1.8;
+}
+
+/* Stats */
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+}
+
+.stat-card{
+background:rgba(255,255,255,0.04);
+padding:35px;
+border-radius:24px;
+text-align:center;
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.stat-card h2{
+font-size:52px;
+margin-bottom:10px;
+background:linear-gradient(to right,#60a5fa,#8b5cf6);
+background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.stat-card p{
+color:#9ca3af;
+}
+
+/* Contact */
+
+.contact-container{
+max-width:800px;
+margin:auto;
+}
+
+form{
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+input,
+textarea{
+width:100%;
+padding:18px;
+border:none;
+outline:none;
+border-radius:18px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+color:white;
+font-size:15px;
+}
+
+textarea{
+resize:none;
+}
+
+input::placeholder,
+textarea::placeholder{
+color:#9ca3af;
+}
+
+/* Footer */
+
+footer{
+padding:35px;
+text-align:center;
+border-top:1px solid rgba(255,255,255,0.08);
+color:#6b7280;
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+.hero h1{
+font-size:58px;
+}
+
+.section-title{
+font-size:42px;
+}
+
+}
+
+@media(max-width:700px){
+
+nav{
+flex-direction:column;
+gap:20px;
+padding:20px;
+}
+
+.nav-links{
+justify-content:center;
+}
+
+.hero{
+padding-top:120px;
+}
+
+.hero h1{
+font-size:42px;
+}
+
+.hero p{
+font-size:16px;
+}
+
+.hero-buttons{
+flex-direction:column;
+align-items:center;
+}
+
+.btn{
+width:100%;
+max-width:320px;
+text-align:center;
+}
+
+.section-title{
+font-size:34px;
+}
+
+}
+
+
+#languageSwitcher{
+padding:10px;
+border-radius:10px;
+background:#0f172a;
+color:white;
+border:1px solid rgba(255,255,255,0.1);
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg-blur1"></div>
+<div class="bg-blur2"></div>
+
+<!-- Navbar -->
+
+<nav>
+
+<div class="logo">
+Catalyst Hub
+</div>
+
+<div class="nav-links">
+<a href="#" class="btn btn-secondary">Home</a>
+<a href="features.html" class="btn btn-secondary">Features</a>
+<a href="dashboard.html"  class="btn btn-secondary">Dashboard</a>
+<a href="login.html" class="btn btn-secondary">Login</a>
+<a href="signup.html" class="btn btn-primary">Get Started</a>
+</div>
+<select id="languageSwitcher" onchange="changeLanguage()">
+    <option value="en">English</option>
+    <option value="hi">हिन्दी</option>
+    <option value="mr">मराठी</option>
+</select>
+</nav>
+
+<!-- Hero -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<div class="hero-badge">
+🚀 Smart Productivity Platform For JEE Aspirants
+</div>
+
+<h1>
+Build Your
+<span class="gradient-text">
+Dream  Journey
+</span>
+With Catalyst Hub
+</h1>
+
+<p>
+Manage your JEE preparation smarter with advanced analytics,
+study tracking, Pomodoro focus sessions, productivity insights,
+and a futuristic dashboard built for toppers.
+</p>
+
+<div class="hero-buttons">
+
+<a href="dashboard.html" class="btn btn-primary">
+Open Dashboard
+</a>
+
+<a href="features.html" class="btn btn-secondary">
+Explore Features
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Preview -->
+
+<section class="preview">
+
+<div class="preview-box">
+
+<div class="preview-top">
+<div class="circle red"></div>
+<div class="circle yellow"></div>
+<div class="circle green"></div>
+</div>
+
+<div class="preview-content">
+
+<div class="preview-card">
+<h3>📚 Study Tracker</h3>
+<p>Track chapters, revision progress, and daily targets easily.</p>
+</div>
+
+<div class="preview-card">
+<h3>⏳ Pomodoro</h3>
+<p>Stay focused with smart productivity sessions and timers.</p>
+</div>
+
+<div class="preview-card">
+<h3>📊 Analytics</h3>
+<p>Visualize your preparation and identify weak areas quickly.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Features -->
+
+<section>
+
+<h2 class="section-title">
+Features
+</h2>
+
+<div class="feature-grid">
+
+<div class="feature-card">
+<div class="feature-icon">📚</div>
+<h3>Study Tracking</h3>
+<p>Track chapters, targets, tests, and revision progress daily.</p>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon">⏳</div>
+<h3>Pomodoro Focus</h3>
+<p>Boost concentration with distraction-free study sessions.</p>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon">📈</div>
+<h3>Progress Analytics</h3>
+<p>Understand your strengths and improve weak subjects faster.</p>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon">🔔</div>
+<h3>Smart Reminders</h3>
+<p>Never miss revision sessions and study goals again.</p>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon">🌐</div>
+<h3>Community Support</h3>
+<p>Connect with fellow aspirants and stay motivated together.</p>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon">🚀</div>
+<h3>Modern Dashboard</h3>
+<p>Beautiful futuristic UI optimized for productivity and focus.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🔒</div>
+<h3>Secure Data</h3>
+<p>Keep your study data safe with our robust security measures.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">⚡</div>
+<h3>Fast Performance</h3>
+<p>Experience lightning-fast load times and smooth interactions.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">📱</div>
+<h3>Mobile App</h3>
+<p>Access your dashboard and track your progress on the go with our upcoming mobile app.</p>
+</div>
+</section>
+<section>
+<div class="feature-card">
+<div class="feature-icon">🤖</div>
+<h3>AI-Powered Insights</h3>
+<p>Get personalized study recommendations and performance analysis powered by artificial intelligence.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🎯</div>
+<h3>Personalized Goals</h3>
+<p>Set and achieve customized study goals based on your unique learning style and pace.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">📅</div>
+<h3>Smart Scheduling</h3>
+<p>Automatically generate optimized study schedules based on your targets and available time.</p>
+</div>
+</section>
+
+<!-- Stats -->
+
+<section>
+
+<h2 class="section-title">
+Platform Stats
+</h2>
+
+<div class="stats-grid">
+
+<div class="stat-card">
+<h2>2027</h2>
+<p>Target JEE Year</p>
+</div>
+
+<div class="stat-card">
+<h2>24/7</h2>
+<p>Productivity Tracking</p>
+</div>
+
+<div class="stat-card">
+<h2>98%</h2>
+<p>Focus Efficiency</p>
+</div>
+
+<div class="stat-card">
+<h2>5K+</h2>
+<p>Students Connected</p>
+</div>
+
+</div>
+
+</section>
+<!--About Us-->
+<section id="about">
+<h2 class="section-title">
+About Us
+</h2>
+<div class="feature-card">
+<div class="feature-icon">👨‍💻</div>
+<h3>Our Team</h3>
+<p>Meet the passionate individuals behind Catalyst Hub, dedicated to helping JEE aspirants achieve their dreams.</p>
+<h3>Our Mission</h3>
+<p>To empower JEE aspirants with smart tools and insights that make their preparation more effective
+and enjoyable.</p>
+<h3>Our Vision</h3>
+<p>To be the go-to platform for JEE preparation, fostering a community of motivated learners and future IITians.</p>
+<h3>Contact Us</h3>
+<p>Have questions or feedback? Reach out to us at <a href="mailto:shivamjagtap2329@gmail.com">shivamjagtap2329@gmail.com</a></p>
+</div>
+</section>
+<!-- Contact -->
+
+<section id="contact">
+
+<h2 class="section-title">
+Contact Us
+</h2>
+
+<div class="contact-container">
+
+<form action="https://formsubmit.co/shivamjagtap2329@gmail.com" method="POST">
+
+<input type="text" name="name" placeholder="Your Name" required>
+
+<input type="email" name="email" placeholder="Your Email" required>
+
+<textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+
+<button type="submit" class="btn btn-primary">
+Send Message
+</button>
+
+</form>
+
+</div>
+
+</section>
+<script>
+
+const translations = {
+
+en: {
+
+navHome:"Home",
+navFeatures:"Features",
+navDashboard:"Dashboard",
+
+heroBadge:"🚀 Smart Productivity Platform For JEE Aspirants",
+
+heroTitle:"Build Your Dream Journey With Catalyst Hub",
+
+heroDesc:"Manage your JEE preparation smarter with advanced analytics, study tracking, Pomodoro focus sessions, productivity insights, and a futuristic dashboard built for toppers."
+
+},
+
+hi: {
+
+navHome:"होम",
+navFeatures:"फीचर्स",
+navDashboard:"डैशबोर्ड",
+
+heroBadge:"🚀 JEE विद्यार्थियों के लिए स्मार्ट प्रोडक्टिविटी प्लेटफॉर्म",
+
+heroTitle:"Catalyst Hub के साथ अपनी सपनों की यात्रा बनाएं",
+
+heroDesc:"एडवांस एनालिटिक्स, स्टडी ट्रैकिंग, पोमोडोरो फोकस सेशन और स्मार्ट डैशबोर्ड के साथ अपनी JEE तैयारी को बेहतर बनाएं।"
+
+},
+
+mr: {
+
+navHome:"मुख्यपृष्ठ",
+navFeatures:"वैशिष्ट्ये",
+navDashboard:"डॅशबोर्ड",
+
+heroBadge:"🚀 JEE विद्यार्थ्यांसाठी स्मार्ट उत्पादकता प्लॅटफॉर्म",
+
+heroTitle:"Catalyst Hub सोबत तुमचा स्वप्नांचा प्रवास घडवा",
+
+heroDesc:"प्रगत विश्लेषण, अभ्यास ट्रॅकिंग, पोमोडोरो फोकस सत्रे आणि स्मार्ट डॅशबोर्डसह तुमची JEE तयारी अधिक प्रभावी करा."
+
+}
+
+};
+
+function changeLanguage(){
+
+const lang =
+document.getElementById("languageSwitcher").value;
+
+document.getElementById("navHome").innerText =
+translations[lang].navHome;
+
+document.getElementById("navFeatures").innerText =
+translations[lang].navFeatures;
+
+document.getElementById("navDashboard").innerText =
+translations[lang].navDashboard;
+
+document.getElementById("heroBadge").innerText =
+translations[lang].heroBadge;
+
+document.getElementById("heroTitle").innerText =
+translations[lang].heroTitle;
+
+document.getElementById("heroDesc").innerText =
+translations[lang].heroDesc;
+
+localStorage.setItem("language", lang);
+}
+
+window.onload = () => {
+
+const savedLang =
+localStorage.getItem("language") || "en";
+
+document.getElementById("languageSwitcher").value =
+savedLang;
+
+changeLanguage();
+};
+
+</script>
+</script>
+<!-- Footer -->
+
+<footer>
+© 2026 Catalyst Hub • Built For Future IITians 🚀
+</footer>
+
+</body>
+</html>
